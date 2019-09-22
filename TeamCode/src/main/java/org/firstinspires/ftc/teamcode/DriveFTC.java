@@ -2,7 +2,7 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.robotcore.hardware.DcMotor
+import com.qualcomm.robotcore.hardware.DcMotor;
 
 @TeleOp
 public class DriveFTC extends OpMode {
@@ -31,7 +31,7 @@ public class DriveFTC extends OpMode {
 
         leftFront.setPower(v1);
         rightFront.setPower(v2);
-        leftRear.setPower(v3)
+        leftRear.setPower(v3);
         rightRear.setPower(v4);
     }
 }
