@@ -22,6 +22,5 @@ public class DriveFTC extends OpMode {
     @Override
     public void loop() {
         leftFront.setPower(-gamepad1.left_stick_y);
-
     }
 }
