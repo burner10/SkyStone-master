@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 
 @TeleOp
 public class DriveFTC extends OpMode {
-    boolean reverse=false;
+    //boolean reverse=false;
     double speed=1;
     DcMotor leftFront, leftRear, rightFront,rightRear;
 
@@ -23,8 +23,8 @@ public class DriveFTC extends OpMode {
     @Override
     public void loop() {
 
-        double x = gamepad1.left_stick_x * speed * (reverse ? -1 : 1);
-        double y = -gamepad1.left_stick_y * speed * (reverse ? -1 : 1);
+        double x = gamepad1.left_stick_x * speed; // * (reverse ? -1 : 1);
+        double y = -gamepad1.left_stick_y * speed; // * (reverse ? -1 : 1);
         double turn = gamepad1.right_stick_x * speed;
         if (gamepad1.dpad_up) {
             speed = 1;
@@ -43,9 +43,9 @@ public class DriveFTC extends OpMode {
         final double v3 = r * Math.sin(robotAngle) + rightX;
         final double v4 = r * Math.cos(robotAngle) - rightX;
         */
-        leftFront.setPower(-(x+y+turn));
-        rightFront.setPower(-(-x + y - turn));
-        leftRear.setPower(-(-x + y + turn));
-        rightRear.setPower(-(x + y - turn));
+        leftFront.setPower(x+y+turn);
+        rightFront.setPower(-x + y- turn);
+        leftRear.setPower(-x + y + turn);
+        rightRear.setPower(x + y - turn);
     }
 }
