@@ -21,8 +21,8 @@ public class DriveFTC extends OpMode {
 
     @Override
     public void loop() {
-        double pair1=(-gamepad1.left_stick_y - gamepad1.left_stick_x)/2;
-        double pair2=(gamepad1.left_stick_y - gamepad1.left_stick_x)/2;
+        double pair1=-(gamepad1.left_stick_y + gamepad1.left_stick_x);
+        double pair2=(gamepad1.left_stick_y + gamepad1.left_stick_x);
 
        /*double r = Math.hypot(gamepad1.left_stick_x, gamepad1.left_stick_y);
         double robotAngle = Math.atan2(gamepad1.left_stick_y, gamepad1.left_stick_x) - Math.PI / 4;
@@ -34,7 +34,7 @@ public class DriveFTC extends OpMode {
         */
         leftFront.setPower(pair2);
         rightFront.setPower(pair1);
-        leftRear.setPower(pair2);
-        rightRear.setPower(pair1);
+        leftRear.setPower(pair1);
+        rightRear.setPower(pair2);
     }
 }
