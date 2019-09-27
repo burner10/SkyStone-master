@@ -21,10 +21,20 @@ public class DriveFTC extends OpMode {
 
     @Override
     public void loop() {
-        double pair1=-(gamepad1.left_stick_y + gamepad1.left_stick_x);
-        double pair2=(gamepad1.left_stick_y + gamepad1.left_stick_x);
-
-       /*double r = Math.hypot(gamepad1.left_stick_x, gamepad1.left_stick_y);
+        double speed=1;
+        double x = gamepad1.left_stick_x * speed * ( -1 : 1);
+        double y = -gamepad1.left_stick_y * speed * ( -1 : 1);
+        double turn = gamepad1.right_stick_x * speed;
+        if (gamepad1.dpad_up) {
+            speed = 1;
+        }
+        if (gamepad1.dpad_left || gamepad1.dpad_right) {
+            speed = .5;
+        }
+        if (gamepad1.dpad_down) {
+            speed = .2;
+        }
+       /*double r = Math.hypot(gamepad1.left_stick_x, gamepad1.left_stick_y)    ;
         double robotAngle = Math.atan2(gamepad1.left_stick_y, gamepad1.left_stick_x) - Math.PI / 4;
         double rightX = gamepad1.right_stick_x;
         final double v1 = r * Math.cos(robotAngle) + rightX;
@@ -32,9 +42,9 @@ public class DriveFTC extends OpMode {
         final double v3 = r * Math.sin(robotAngle) + rightX;
         final double v4 = r * Math.cos(robotAngle) - rightX;
         */
-        leftFront.setPower(pair2);
-        rightFront.setPower(pair1);
-        leftRear.setPower(pair1);
-        rightRear.setPower(pair2);
+        leftFront.setPower(-(x+y+turn));
+        rightFront.setPower(-(-x + y - turn));
+        leftRear.setPower(-(-x + y + turn));
+        rightRear.setPower(-(x + y - turn));
     }
 }
