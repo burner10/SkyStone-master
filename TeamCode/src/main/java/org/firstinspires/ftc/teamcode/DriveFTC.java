@@ -32,9 +32,9 @@ public class DriveFTC extends OpMode {
         final double v3 = r * Math.sin(robotAngle) + rightX;
         final double v4 = r * Math.cos(robotAngle) - rightX;
         */
-        leftFront.setPower(pair1);
-        rightFront.setPower(pair2);
-        leftRear.setPower(pair1);
-        rightRear.setPower(pair2);
+        leftFront.setPower(pair2);
+        rightFront.setPower(pair1);
+        leftRear.setPower(pair2);
+        rightRear.setPower(pair1);
     }
 }
