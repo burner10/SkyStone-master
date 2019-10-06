@@ -10,8 +10,8 @@ public class DriveFTC extends OpMode {
     //boolean reverse=false;
     double speed=1;
     DcMotor leftFront, leftRear, rightFront, rightRear;
-
-
+    int speedLeft=0;
+    int speedRight=0;
     @Override
     public void init() {
         leftFront = hardwareMap.dcMotor.get("leftFront");
@@ -36,10 +36,10 @@ public class DriveFTC extends OpMode {
         if (gamepad1.dpad_down) {
             speed = .2;
         }
-        if (!gamepad1.left_bumper || !gamepad1.left_bumper) {
+        if (!gamepad1.left_bumper || !gamepad1.right_bumper) {
             double x = gamepad1.left_stick_x * speed; // * (reverse ? -1 : 1);
             double y = -gamepad1.left_stick_y * speed; // * (reverse ? -1 : 1);
-            double turn = gamepad1.right_stick_x * speed;
+            double turn =-1* gamepad1.right_stick_y * speed;
        /*double r = Math.hypot(gamepad1.left_stick_x, gamepad1.left_stick_y)    ;
         double robotAngle = Math.atan2(gamepad1.left_stick_y, gamepad1.left_stick_x) - Math.PI / 4;
         double rightX = gamepad1.right_stick_x;
@@ -55,8 +55,7 @@ public class DriveFTC extends OpMode {
         }
         else
         {
-            int speedLeft=0;
-            int speedRight=0;
+
             if (gamepad1.left_bumper)
             {
                 speedLeft+=.1;
@@ -64,7 +63,7 @@ public class DriveFTC extends OpMode {
                 speedRight=speedRight%1;
                 speedLeft=speedLeft%1;
             }
-            if (gamepad1.right_bumper)
+            else
             {
                 speedLeft-=.1;
                 speedRight+=.1;
