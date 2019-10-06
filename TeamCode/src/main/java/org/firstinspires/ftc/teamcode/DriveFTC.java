@@ -36,7 +36,7 @@ public class DriveFTC extends OpMode {
         if (gamepad1.dpad_down) {
             speed = .2;
         }
-        if (!gamepad1.left_bumper && !gamepad1.left_bumper) {
+        if (!gamepad1.left_bumper || !gamepad1.left_bumper) {
             double x = gamepad1.left_stick_x * speed; // * (reverse ? -1 : 1);
             double y = -gamepad1.left_stick_y * speed; // * (reverse ? -1 : 1);
             double turn = gamepad1.right_stick_x * speed;
