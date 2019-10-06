@@ -27,10 +27,6 @@ public class DriveFTC extends OpMode {
 
     @Override
     public void loop() {
-
-        double x = gamepad1.left_stick_x * speed; // * (reverse ? -1 : 1);
-        double y = -gamepad1.left_stick_y * speed; // * (reverse ? -1 : 1);
-        double turn = gamepad1.right_stick_x * speed;
         if (gamepad1.dpad_up) {
             speed = 1;
         }
@@ -40,6 +36,10 @@ public class DriveFTC extends OpMode {
         if (gamepad1.dpad_down) {
             speed = .2;
         }
+        if (!gamepad1.left_bumper && !gamepad1.left_bumper) {
+            double x = gamepad1.left_stick_x * speed; // * (reverse ? -1 : 1);
+            double y = -gamepad1.left_stick_y * speed; // * (reverse ? -1 : 1);
+            double turn = gamepad1.right_stick_x * speed;
        /*double r = Math.hypot(gamepad1.left_stick_x, gamepad1.left_stick_y)    ;
         double robotAngle = Math.atan2(gamepad1.left_stick_y, gamepad1.left_stick_x) - Math.PI / 4;
         double rightX = gamepad1.right_stick_x;
@@ -48,9 +48,33 @@ public class DriveFTC extends OpMode {
         final double v3 = r * Math.sin(robotAngle) + rightX;
         final double v4 = r * Math.cos(robotAngle) - rightX;
         */
-        leftFront.setPower(x+y+turn);
-        rightFront.setPower(-x + y- turn);
-        leftRear.setPower(-x + y + turn);
-        rightRear.setPower(x + y - turn);
+            leftFront.setPower(x + y + turn);
+            rightFront.setPower(-x + y - turn);
+            leftRear.setPower(-x + y + turn);
+            rightRear.setPower(x + y - turn);
+        }
+        else
+        {
+            int speedLeft=0;
+            int speedRight=0;
+            if (gamepad1.left_bumper)
+            {
+                speedLeft+=.1;
+                speedRight-=.1;
+                speedRight=speedRight%1;
+                speedLeft=speedLeft%1;
+            }
+            if (gamepad1.right_bumper)
+            {
+                speedLeft-=.1;
+                speedRight+=.1;
+                speedRight=speedRight%1;
+                speedLeft=speedLeft%1;
+            }
+            leftFront.setPower(speedLeft*speed);
+            leftRear.setPower(speedLeft*speed);
+            rightFront.setPower(speedRight*speed);
+            rightRear.setPower(speedRight*speed);
+        }
     }
 }
