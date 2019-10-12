@@ -9,11 +9,13 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 public class DriveFTC extends OpMode {
     //boolean reverse=false;
     double speed=1;
-    DcMotor leftFront, leftRear, rightFront, rightRear;
-    int speedLeft=0;
-    int speedRight=0;
+    DcMotor leftFront, leftRear, rightFront, rightRear, forkOneRight, forkOneLeft;
+    double speedLeft=0;
+    double speedRight=0;
     @Override
     public void init() {
+        forkOneLeft=hardwareMap.dcMotor.get("fOL");
+        forkOneRight=hardwareMap.dcMotor.get("fOR");
         leftFront = hardwareMap.dcMotor.get("leftFront");
         leftRear = hardwareMap.dcMotor.get("leftRear");
         rightFront = hardwareMap.dcMotor.get("rightFront");
@@ -75,5 +77,21 @@ public class DriveFTC extends OpMode {
             rightFront.setPower(speedRight*speed);
             rightRear.setPower(speedRight*speed);
         }
+        if (gamepad1.left_trigger>0)
+        {
+            forkOneLeft.setPower(.5);
+            forkOneRight.setPower(.5);
+        }
+        else if (gamepad1.right_trigger>0)
+        {
+            forkOneLeft.setPower(-.5);
+            forkOneRight.setPower(-.5);
+        }
+        else
+        {
+            forkOneLeft.setPower(0);
+            forkOneRight.setPower(0);
+        }
+
     }
 }
