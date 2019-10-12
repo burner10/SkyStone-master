@@ -12,6 +12,7 @@ public class DriveFTC extends OpMode {
     DcMotor leftFront, leftRear, rightFront, rightRear, forkOneRight, forkOneLeft;
     double speedLeft=0;
     double speedRight=0;
+    double speedOne=0;
     @Override
     public void init() {
         forkOneLeft=hardwareMap.dcMotor.get("fOL");
