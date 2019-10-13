@@ -9,14 +9,15 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 public class DriveFTC extends OpMode {
     //boolean reverse=false;
     double speed=1;
-    DcMotor leftFront, leftRear, rightFront, rightRear, forkOneRight, forkOneLeft;
+    DcMotor leftFront, leftRear, rightFront, rightRear, forkOneRight, forkOneLeft, forkTwoLeft, forkTwoRight;
     double speedLeft=0;
     double speedRight=0;
-    double speedOne=0;
     @Override
     public void init() {
         forkOneLeft=hardwareMap.dcMotor.get("fOL");
         forkOneRight=hardwareMap.dcMotor.get("fOR");
+        forkTwoLeft=hardwareMap.dcMotor.get("fTL");
+        forkTwoRight=hardwareMap.dcMotor.get("fTR");
         leftFront = hardwareMap.dcMotor.get("leftFront");
         leftRear = hardwareMap.dcMotor.get("leftRear");
         rightFront = hardwareMap.dcMotor.get("rightFront");
@@ -30,6 +31,8 @@ public class DriveFTC extends OpMode {
 
     @Override
     public void loop() {
+
+        //driving code start
         if (gamepad1.dpad_up) {
             speed = 1;
         }
@@ -78,21 +81,15 @@ public class DriveFTC extends OpMode {
             rightFront.setPower(speedRight*speed);
             rightRear.setPower(speedRight*speed);
         }
-        if (gamepad1.left_trigger>0)
-        {
-            forkOneLeft.setPower(.5);
-            forkOneRight.setPower(.5);
-        }
-        else if (gamepad1.right_trigger>0)
-        {
-            forkOneLeft.setPower(-.5);
-            forkOneRight.setPower(-.5);
-        }
-        else
-        {
-            forkOneLeft.setPower(0);
-            forkOneRight.setPower(0);
-        }
+        //driving code end
 
+        //arm code start
+        double armSpeed1=gamepad2.left_stick_y;
+        double armSpeed2=gamepad2.right_stick_y;
+        forkOneLeft.setPower(armSpeed1);
+        forkOneRight.setPower(armSpeed1);
+        forkTwoLeft.setPower(armSpeed2);
+        forkTwoRight.setPower(armSpeed2);
+        //arm code end
     }
 }
