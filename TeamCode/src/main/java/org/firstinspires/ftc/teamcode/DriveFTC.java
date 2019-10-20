@@ -4,20 +4,22 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.hardware.Servo;
 
 @TeleOp
 public class DriveFTC extends OpMode {
     //boolean reverse=false;
     double speed=1;
-    DcMotor leftFront, leftRear, rightFront, rightRear, forkOneRight, forkOneLeft, forkTwoLeft, forkTwoRight;
+    DcMotor leftFront, leftRear, rightFront, rightRear, linSlide1, linSlide2;
     double speedLeft=0;
+    Servo wrist1, wrist2;
     double speedRight=0;
     @Override
     public void init() {
-        forkOneLeft=hardwareMap.dcMotor.get("fOL");
-        forkOneRight=hardwareMap.dcMotor.get("fOR");
-        forkTwoLeft=hardwareMap.dcMotor.get("fTL");
-        forkTwoRight=hardwareMap.dcMotor.get("fTR");
+        wrist1=hardwareMap.servo.get("w1");
+        wrist2=hardwareMap.servo.get("w2");
+        linSlide1=hardwareMap.dcMotor.get("lS1");
+        linSlide2=hardwareMap.dcMotor.get("lS2");
         leftFront = hardwareMap.dcMotor.get("leftFront");
         leftRear = hardwareMap.dcMotor.get("leftRear");
         rightFront = hardwareMap.dcMotor.get("rightFront");
@@ -28,7 +30,8 @@ public class DriveFTC extends OpMode {
         //rightFront.setDirection(DcMotorSimple.Direction.REVERSE);
         //leftRear.setDirection(DcMotorSimple.Direction.REVERSE);
     }
-
+    double w1=0;
+    double w2=0;
     @Override
     public void loop() {
 
@@ -85,11 +88,12 @@ public class DriveFTC extends OpMode {
 
         //arm code start
         double armSpeed1=gamepad2.left_stick_y;
-        double armSpeed2=gamepad2.right_stick_y;
-        forkOneLeft.setPower(armSpeed1);
-        forkOneRight.setPower(armSpeed1);
-        forkTwoLeft.setPower(armSpeed2);
-        forkTwoRight.setPower(armSpeed2);
-        //arm code end
+        w1=gamepad2.left_trigger;
+        w2=gamepad2.right_trigger;
+        //^ that will change in the future
+        wrist1.setPosition(w1);
+        wrist2.setPosition(w2);
+        linSlide1.setPower(armSpeed1);
+        linSlide2.setPower(armSpeed1);
     }
 }
