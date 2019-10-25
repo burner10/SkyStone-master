@@ -13,9 +13,7 @@ public class DriveFTC extends OpMode {
     double w1=0;
     double w2=0;
     DcMotor leftFront, leftRear, rightFront, rightRear, linSlide1, linSlide2;
-    double speedLeft=0;
     Servo wrist1, wrist2;
-    double speedRight=0;
     @Override
     public void init() {
         wrist1=hardwareMap.servo.get("w1");
