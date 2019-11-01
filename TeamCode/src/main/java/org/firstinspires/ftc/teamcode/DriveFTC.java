@@ -4,7 +4,6 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
-import com.qualcomm.robotcore.hardware.Servo;
 
 @TeleOp
 public class DriveFTC extends OpMode {
@@ -14,12 +13,15 @@ public class DriveFTC extends OpMode {
     double w2=0;
     DcMotor leftFront, leftRear, rightFront, rightRear, linSlide1, linSlide2;
     Servo wrist1, wrist2;
+    DcMotor leftFront, leftRear, rightFront, rightRear, forkOneRight, forkOneLeft, forkTwoLeft, forkTwoRight;
+    double speedLeft=0;
+    double speedRight=0;
     @Override
     public void init() {
-        wrist1=hardwareMap.servo.get("w1");
-        wrist2=hardwareMap.servo.get("w2");
-        linSlide1=hardwareMap.dcMotor.get("lS1");
-        linSlide2=hardwareMap.dcMotor.get("lS2");
+        forkOneLeft=hardwareMap.dcMotor.get("fOL");
+        forkOneRight=hardwareMap.dcMotor.get("fOR");
+        forkTwoLeft=hardwareMap.dcMotor.get("fTL");
+        forkTwoRight=hardwareMap.dcMotor.get("fTR");
         leftFront = hardwareMap.dcMotor.get("leftFront");
         leftRear = hardwareMap.dcMotor.get("leftRear");
         rightFront = hardwareMap.dcMotor.get("rightFront");
@@ -54,12 +56,11 @@ public class DriveFTC extends OpMode {
 
         //arm code start
         double armSpeed1=gamepad2.left_stick_y;
-        w1=gamepad2.left_trigger;
-        w2=gamepad2.right_trigger;
-        //^ that will change in the future
-        wrist1.setPosition(w1);
-        wrist2.setPosition(w2);
-        linSlide1.setPower(armSpeed1);
-        linSlide2.setPower(armSpeed1);
+        double armSpeed2=gamepad2.right_stick_y;
+        forkOneLeft.setPower(armSpeed1);
+        forkOneRight.setPower(armSpeed1);
+        forkTwoLeft.setPower(armSpeed2);
+        forkTwoRight.setPower(armSpeed2);
+        //arm code end
     }
 }
